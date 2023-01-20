@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./echarts.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>
+           LES INCENDIES MALVEILLANTS
+        </h1>
+    </header>
+    <main>
+        <section>
+            <div>
+                <h2>
+                    D'ou proviennent les incendies ?
+                </h2>
+                <p>
+                    Il y a de nombreuses raisons pour lesquelles des incendies peuvent se produire. Certains sont naturels, tandis que d'autres sont causés par l'action humaine. Les incendies de forêt, par exemple, peuvent être causés par des tempêtes électriques, des éclairs ou des tempêtes de sable. Ces incendies naturels peuvent être difficiles à prévenir et à contrôler, car ils dépendent des conditions météorologiques et de la végétation présente dans la région.
+
+D'autres incendies sont causés par l'action humaine, tels que les incendies de broussailles causés par la cigarette, les feux de camp ou les incendies criminels. Ces incendies peuvent être évités en prenant des précautions élémentaires telles que l'éteindre les cigarettes et les feux de camp correctement, et signaler les comportements suspects. En outre, les incendies peuvent également être causés par des problèmes électriques ou mécaniques, tels que les court-circuits, les défauts de matériel électrique, les explosions et les fuites de gaz. Ces incendies peuvent être prévenus en maintenant les bâtiments et les équipements en bon état et en respectant les normes de sécurité.
+
+Enfin, il est important de noter que certains incendies sont causés par des phénomènes climatiques extrêmes tels que les sécheresses, les incendies de brousailles, les incendies de forêts etc. Les incendies causés par le changement climatique et la déforestation sont de plus en plus fréquents.
+                </p>
+            </div class="droite">
+                <div id="chart1" style="width:80%; height:400px">
+                </div>
+                
+                 
+            </div>
+        </div class="droite">
+        <div id="chart2" style="width:120%; height:400px">
+        </div>
+    </div>
+    <div class="align">
+        <h2>
+            Comment arreter les incendies malveillant en france ?
+                    </h2>
+        <p>
+            Il existe plusieurs moyens d'arrêter les incendies malveillants en France. Tout d'abord, il est important de signaler tout comportement suspect à la police ou aux autorités locales. Il est également essentiel de sensibiliser les communautés à la prévention des incendies, en promouvant des pratiques sûres telles que l'extinction des cigarettes et des feux de camp correctement, et en évitant de mettre en danger les forêts et les zones boisées.
+        
+        Les autorités peuvent également mettre en place des patrouilles pour surveiller les zones à risque et détecter les incendies suspects rapidement. Les incendies malveillants peuvent également être combattus en utilisant des techniques de lutte contre les incendies, telles que l'utilisation de camions-pompes et de pulvérisateurs d'eau pour éteindre les flammes.
+        
+        Il est également important de poursuivre en justice les personnes qui déclenchent des incendies malveillants, afin de dissuader les criminels potentiels de commettre de tels actes. Enfin, il est important de soutenir les communautés affectées par les incendies malveillants en leur offrant une aide financière et en leur fournissant des services de secours et de récupération.
+        </p>
+    </div>
+
+      <div class="myChart3" id="left" style="width:100%">
+        <canvas id="myChart3"></canvas>
+         </div>
+         <div class="align">
+          <h2>
+              L'impact des incendies Malveillants ?
+                      </h2>
+          <p>
+            Les incendies malveillants, c'est-à-dire les incendies délibérément allumés, ont un impact plus grave que les incendies naturels ou accidentels. Ils peuvent causer des dommages physiques importants aux bâtiments, aux terrains et aux biens matériels, ainsi qu'aux personnes qui y vivent ou travaillent. De plus, ils peuvent avoir des conséquences émotionnelles profondes pour les victimes, qui peuvent perdre leur maison, leurs possessions et même leur vie. Les incendies malveillants peuvent également entraîner des perturbations économiques importantes dans les communautés touchées, notamment en raison de la perte de logements, de commerces et d'emplois. Enfin, ces incendies peuvent également avoir des conséquences environnementales importantes, en détruisant des habitats naturels et en perturbant les écosystèmes locaux.
+            
+            
+            Ce graphique nous montre bien à quelle points la malveillance et mère de toutes ses series d'incendies par exemple actuellement en 10 ans sur les Pyrénnées il y a eu plus d'incendies malveillant que la totalité des autres incendies exposé ci-dessous.
+          </p>
+      </div>
+
+        </section>
+    </main>    
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.js"></script>
+    <script>
+        fetch('./csvjson.json')
+    .then((response) => response.json())
+    .then((json) => {
+      
+    const groupByYear = json.reduce((acc, current) => {
+      const year = current["Année"]
+      if (!acc[year]) {
+        acc[year] = []
+      }
+
+      acc[year].push(current)
+
+      return acc
+    }, {})
+
+      // Initialize the echarts instance based on the prepared dom
+    const myChart = echarts.init(document.querySelector('#chart1'));
+
+    
+// Specify the configuration items and data for the chart
+const option = {
+title: {
+  text: '        Incendies entre 2010 et 2020 dans le Herault'
+},
+tooltip: {},
+legend: {
+  data: ['Mois']
+},
+xAxis: {
+  name: "Nombre",
+  data: Object.keys(groupByYear), // Reécupère les clef d'un objets
+
+},
+yAxis: {},
+series: [
+  {
+    name: 'Incendies',
+    type: 'bar',
+    data: Object.values(groupByYear).map((tableauDincdendies) => tableauDincdendies.length)
+  }
+]
+};
+
+// Display the chart using the configuration items and data just specified.
+myChart.setOption(option);
+
+    });
+    </script>
+
+
+
+
+</section>
+</main>    
+<script>
+    fetch('./csvjson2.json')
+.then((response) => response.json())
+.then((json) => {
+  
+const groupByYear = json.reduce((acc, current) => {
+  const year = current["Année"]
+  if (!acc[year]) {
+    acc[year] = []
+  }
+
+  acc[year].push(current)
+
+  return acc
+}, {})
+
+  // Initialize the echarts instance based on the prepared dom
+const myChart = echarts.init(document.querySelector('#chart2'));
+
+
+// Specify the configuration items and data for the chart
+const option = {
+title: {
+text: 'Incendies entre 2010 et 2020 en Corse 2A'
+},
+tooltip: {},
+legend: {
+data: ['Mois']
+},
+xAxis: {
+name: "Nombre",
+data: Object.keys(groupByYear), // Reécupère les clef d'un objets
+
+},
+yAxis: {},
+series: [
+{
+name: 'Incendies',
+type: 'line',
+data: Object.values(groupByYear).map((tableauDincdendies) => tableauDincdendies.length)
+}
+]
+};
+
+// Display the chart using the configuration items and data just specified.
+myChart.setOption(option);
+
+});
+</script>
+
+<script>
+Chart.defaults.plugins.title.display = true;
+Chart.defaults.plugins.title.text ="Les Différents type de feu dans les Pyrénnées"
+</script>
+
+
+<script>
+  const bmx = document.getElementById('myChart3');
+
+  new Chart(bmx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Travaux agricoles', 'Accidentelle', 'Cause électrique naturelle', 'Involontaire Travaux', 'Malveillance',],
+      datasets: [{
+        label: 'Pyrennée',
+        data: [95 , 143, 34, 159, 503],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      title: {
+text: 'Incendies entre 2010 et 2020 dans le 2A'
+},
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+<h3> En Conclusion 
+  <p>Les feux malveillants sont des actes criminels qui causent des dommages considérables aux propriétés, aux vies humaines et à l'environnement.</p>
+</h3>
+
+</body>
+</html>
